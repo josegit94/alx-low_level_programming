@@ -1,5 +1,5 @@
 #include "lists.h"
-#include <stdio.h>
+
 /**
  * free_listint_safe - frees a linked list
  * @h: pointer to the first node in the linked list
@@ -8,7 +8,7 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t len = 1;
+	size_t len = 0;
 	int diff;
 	listint_t *temp;
 
@@ -21,11 +21,13 @@ size_t free_listint_safe(listint_t **h)
 		if (diff > 0)
 		{
 			temp = (*h)->next;
+			free(*h);
 			*h = temp;
 			len++;
 		}
 		else
 		{
+			free(*h);
 			*h = NULL;
 			len++;
 			break;
